@@ -1,4 +1,5 @@
 com.log
 *api.key
+build/
 elecChemDev.egg-info/
 elecChemDev/__pycache__/
