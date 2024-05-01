@@ -11,11 +11,11 @@ setup(
     install_requires=[
         "ipywidgets~=7.7.0",
         "nglview~=2.7.7",
-        "mp_api",
-        "pymatgen",
-        "ase",
+        "mp_api~=0.41.2",
+        "pymatgen~=2024.3.1",
+        "ase~=3.22.1",
         "aseMolec @ git+https://github.com/imagdau/aseMolec.git",
-        "tqdm"
+        "tqdm~=4.66.2"
     ]
 )
 
