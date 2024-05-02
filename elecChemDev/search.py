@@ -15,7 +15,6 @@ class elyte(MPRester):
             API_KEY = keyFile.readline().rstrip()
         super().__init__(API_KEY)
         self.docs = self.molecules.jcesr.search(nelements=(0,1000))
-        
         col = {
             'elemComb': [],
             'natoms': [],
@@ -41,8 +40,7 @@ class elyte(MPRester):
             col['svg'].append(doc.svg)
             col['hash'].append(at.info['uid'])
             col['Atoms'].append(at)
-
-        self.df = pd.DataFrame(col).sort_values(by=['elemComb', 'natoms', 'mass', 'charge', 'spin']).set_index('hash')
+        self.df = pd.DataFrame(col).sort_values(by=['elemComb', 'natoms', 'mass', 'charge', 'spin']).drop_duplicates(subset=['hash']).set_index('hash')
         
     def get_molecs(self, hashes, field):
         col = []
