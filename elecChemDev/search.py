@@ -10,8 +10,12 @@ warnings.filterwarnings("ignore")
 pd.set_option('display.max_rows', 100)
 
 class elyte(MPRester):
-    def __init__(self):
-        with open("api.key", "r") as keyFile:
+    def __init__(self, path=''):
+        if path:
+            fkey = path
+        else:
+            fkey = "api.key"
+        with open(fkey, "r") as keyFile:
             API_KEY = keyFile.readline().rstrip()
         super().__init__(API_KEY)
         self.docs = self.molecules.jcesr.search(nelements=(0,1000))
