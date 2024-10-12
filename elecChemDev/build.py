@@ -17,7 +17,7 @@ def attach_randomly_attempts(at1, at2, distance, Nattempts=100):
             pass
     raise RuntimeError('Attach did not converge after '+str(attempt)+' attempts. Consider increasing Nattempts or Volume!')
 
-def pack_mols(mols, Nmols, dens=1.0, cell=[1,1,1], distance=2.0, Nattempts=200, fct=1):
+def pack_mols(mols, Nmols, dens=1.0, cell=[1,1,1], distance=2.0, Nattempts=200, fct=1, dir=[1,1,1]):
     #compute total mass
     M = 0
     for at, N in zip(mols, Nmols):
@@ -28,7 +28,8 @@ def pack_mols(mols, Nmols, dens=1.0, cell=[1,1,1], distance=2.0, Nattempts=200, 
     densfact = (ase.units.m/1.0e2)**3/ase.units.mol
     V = M/dens*densfact
     scale = V/config.get_volume()
-    config.cell *= scale**(1/3)
+    for i in np.where(dir)[0]:
+        config.cell[i] *= scale**(1/np.sum(dir))
 
     #shuffle molecule collection
     col = []
